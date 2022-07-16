@@ -1,33 +1,33 @@
 <template>
-  <div class="flex items-center space-x-3 right-5 bottom-5 absolute z-10">
-    <button class="btn" v-tooltip="'Export Types'" @click="exportTypes = true">
-      <i-mdi:language-typescript></i-mdi:language-typescript>
+  <div class="flex items-center gap-x-3 right-5 bottom-5 absolute z-10 backdrop-blur-sm rounded px-3 border border-zinc-500/50 dark:border-zinc-300/50">
+    <button class="text-xl  text-zinc-600 dark:text-zinc-300 btn hover:text-green-600" v-tooltip="'Export Types'" @click="exportTypes = true">
+      <i-mdi:language-typescript />
     </button>
 
-    <button class="btn" v-tooltip="'Export SQL'" @click="exportSQL = true">
-      <i-mdi:database-export-outline></i-mdi:database-export-outline>
+    <button class="text-xl  text-zinc-600 dark:text-zinc-300 btn hover:text-green-600" v-tooltip="'Export SQL'" @click="exportSQL = true">
+      <i-mdi:database-export-outline />
     </button>
 
-    <button class="btn" v-tooltip="'Take a screenshot'" @click="screenshot">
-      <i-mdi:camera-outline></i-mdi:camera-outline>
+    <button class="text-xl  text-zinc-600 dark:text-zinc-300 btn hover:text-green-600" v-tooltip="'Take a screenshot'" @click="screenshot">
+      <i-mdi:camera-outline />
     </button>
 
-    <button class="btn" v-tooltip="'Auto arrange'" @click="autoArrange">
-      <i-ic:baseline-auto-fix-high></i-ic:baseline-auto-fix-high>
+    <button class="text-xl  text-zinc-600 dark:text-zinc-300 btn hover:text-green-600" v-tooltip="'Auto arrange'" @click="autoArrange">
+      <i-ic:baseline-auto-fix-high />
     </button>
 
     <button
-      class="btn"
+      class="text-xl  text-zinc-600 dark:text-zinc-300 btn hover:text-green-600"
       v-tooltip="'Focus everything center'"
       @click="focusView"
     >
-      <i-uil:focus-target></i-uil:focus-target>
+      <i-uil:focus-target />
     </button>
 
     <HelperZoom />
 
-    <ModalSQL :open="exportSQL" @close="exportSQL = false"></ModalSQL>
-    <ModalTypes :open="exportTypes" @close="exportTypes = false"></ModalTypes>
+    <ModalSQL :open="exportSQL" @close="exportSQL = false" />
+    <ModalTypes :open="exportTypes" @close="exportTypes = false" />
   </div>
 </template>
 
