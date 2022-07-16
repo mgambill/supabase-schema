@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
 import SelectionArea, { type SelectionEvent } from '@viselect/vue'
-import { state } from '../store'
+import { limit, state } from '../store'
 import { Buttons } from '../interface';
 
 const isMounted = ref(false)
@@ -42,9 +42,9 @@ const scrollEvent = (e: WheelEvent) => {
     const ys =
       (e.clientY - state.schemaView.translate.y) / state.schemaView.scale
     if (-e.deltaY > 0) {
-      if (state.schemaView.scale <= 3) state.schemaView.scale *= scaleFactor
+      if (state.schemaView.scale * scaleFactor < limit.max) state.schemaView.scale *= scaleFactor
     } else {
-      if (state.schemaView.scale >= 0.5) state.schemaView.scale /= scaleFactor
+      if (state.schemaView.scale / scaleFactor > limit.min) state.schemaView.scale /= scaleFactor
     }
     state.schemaView.translate.x = e.clientX - xs * state.schemaView.scale
     state.schemaView.translate.y = e.clientY - ys * state.schemaView.scale

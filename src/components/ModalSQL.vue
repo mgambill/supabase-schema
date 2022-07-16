@@ -11,7 +11,7 @@
             {{ copied ? 'Copied!' : 'Copy' }}
           </button>
         </div>
-        <div class="p-4 text-dark-100 dark:text-white h-full overflow-hidden overflow-y-auto">
+        <div class="p-4 text-dark-100 dark:text-white h-full overflow-hidden overflow-y-auto custom-scrollbar">
           <p class="mb-4">
             There might be some issues with the exported code. You may submit
             <a href="https://github.com/zernonia/supabase-schema/issues" target="_blank" class="underline">issues

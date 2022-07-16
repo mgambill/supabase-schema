@@ -2,7 +2,10 @@ import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
 import type { Column, TableState } from './interface'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-
+export const limit = {
+  max: 2.05,
+  min: .21,
+}
 export const state = reactive({
   isModalOpen: false,
   tables: useStorage('table-list', {} as TableState),

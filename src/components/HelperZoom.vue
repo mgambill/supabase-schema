@@ -16,14 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { state } from '../store'
+import { limit, state } from '../store'
 
 const updateView = (type: string) => {
   if (type == 'plus') {
-    if (state.schemaView.scale >= 2) return
+    if (state.schemaView.scale > limit.max) return
     state.schemaView.scale += 0.1
   } else {
-    if (state.schemaView.scale <= 0.2) return
+    if (state.schemaView.scale <= limit.min) return
     state.schemaView.scale -= 0.1
   }
 }

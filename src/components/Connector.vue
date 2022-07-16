@@ -1,18 +1,20 @@
 <template>
   <svg
+    :class="{ '!stroke-emerald-600 z-20': isHover }"
     class="stroke-3 absolute z-10 fill-zinc-400 stroke-zinc-200 dark:fill-zinc-400 dark:stroke-zinc-500 hover:stroke-green-600 dark:hover:stroke-green-600 hover:z-20 group"
     :id="svg" width="0" height="0" pointer-events="none">
     <path :d="attr" pointer-events="visibleStroke" stroke="transparent" fill="transparent" stroke-width="15" />
-    <path ref="path" class="fill-transparent" pointer-events="visibleStroke" @mouseenter="isHover = true"
-      @mouseleave="isHover = false" />
-    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" stroke="none" class="group-hover:fill-green-600"> fk </circle>
+    <path ref="path" class="fill-transparent" pointer-events="visibleStroke"
+      :stroke-dasharray="isHover && isForiegnKey  ? '5,10' : ''" />
+    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" stroke="none" class="group-hover:fill-green-600"
+      :class="{ '!fill-emerald-600 z-20': isHover }"> fk </circle>
   </svg>
 </template>
 
 <script setup lang="ts">
 import { state } from '../store'
 import { computed, onMounted, ref, toRefs, watch } from 'vue'
-import { useDark } from '@vueuse/core'
+
 
 type Props = {
   svg: string
@@ -54,9 +56,12 @@ const fkPos = ref({
 const path = ref<SVGClipPathElement | null>(null)
 
 let attr = $ref("")
+let isReferenceKey = $ref(false)
+let isForiegnKey = $ref(false)
+let isHover = $ref<boolean>(false)
 
 const drawSVG = () => {
-  if (!path.value) return
+  //if (!path.value) return
   const svgElem = document.getElementById(svg) as HTMLElement
   const startElem = document.getElementById(id) as HTMLElement
   const endElem = document.getElementById(target) as HTMLElement
@@ -93,10 +98,10 @@ const drawSVG = () => {
     posDiffX = posEndX - posStartX
     posDiffX < 0 ? (posSvgX = posEndX) : (posSvgX = posStartX)
 
-      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+    attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posDiffX) + 30} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
-    path.value.setAttribute('d',attr)
+    path.value.setAttribute('d', attr)
 
   } else if (posDiffX > 0) {
     posStartX = positionStart.x + startRight
@@ -104,21 +109,21 @@ const drawSVG = () => {
     posDiffX = posEndX - posStartX
     posSvgX = posStartX
 
-      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+    attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posStartX - posSvgX + posDiffX / 2)} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
-    path.value.setAttribute('d',attr)
+    path.value.setAttribute('d', attr)
 
   } else {
     posStartX = positionStart.x + startLeft
     posEndX = endRight + positionEnd.x
     posDiffX = posEndX - posStartX
     posSvgX = posEndX
-      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+    attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posStartX - posSvgX + posDiffX / 2)} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
 
-    path.value.setAttribute('d',attr)
+    path.value.setAttribute('d', attr)
   }
 
   svgElem.style.left = posSvgX + 'px'
@@ -130,15 +135,19 @@ const drawSVG = () => {
   fkPos.value.y = posEndY - posSvgY + 10
 }
 
-const isHover = ref(false)
 watch(
-  () => state.tableHighlighted,
-  (n) => {
-    if (!n) {
-      isHover.value = false
-    } else if (tableName == n || tableTargetName == n) {
-      isHover.value = true
-    }
+  () => [state.tableHighlighted],
+  ([n]) => {
+    //console.log(Array.from(s).length)
+    // if (!n && Array.from(s).length === 0) {
+    //   isHover.value = false
+    // } else {
+    //const arr = Array.from(s).map(x => x.id) as any[]
+    isHover = (n && (tableName == n || tableTargetName == n))
+    //|| (arr.length && (arr.includes(tableName) || arr.includes(tableTargetName)))
+    isReferenceKey = (n && tableTargetName === n)
+    isForiegnKey = (n && tableName === n)
+    //}
   }
 )
 </script>
