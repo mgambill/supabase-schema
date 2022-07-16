@@ -3,7 +3,7 @@
     <Helper />
     <SelectionArea class="container" :options="{ selectables: 'div.selectable' }" :on-move="onMove" :on-start="onStart"
       :on-before-start="onBeforeStart">
-      <div id="screen-canvas" class="w-screen h-screen relative overflow-hidden bg-white dark:bg-dark-900"
+      <div id="screen-canvas" class="w-screen h-screen relative overflow-hidden bg-white dark:bg-zinc-900"
         :style="{ cursor: isDragging ? 'grabbing' : 'default' }" @wheel="scrollEvent" @mousedown="dragStart"
         @mouseup="isDragging = false">
         <div id="canvas" ref="canvas" :style="{ transformOrigin, transform: transformation }"

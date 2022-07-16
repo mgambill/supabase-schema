@@ -1,6 +1,5 @@
 import { createApp, type DirectiveBinding } from 'vue'
 import App from './App.vue'
-import 'virtual:windi.css'
 import './assets/main.css'
 import './assets/tooltip.css'
 import router from './router'

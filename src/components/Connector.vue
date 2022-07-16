@@ -1,10 +1,8 @@
 <template>
-  <svg class="absolute z-10" :id="svg" width="0" height="0" pointer-events="none">
-    <path ref="path" class="fill-transparent" :stroke="computedStrokeColor" pointer-events="visibleStroke"
-      style="stroke-width: 3px" @mouseenter="isHover = true" @mouseleave="isHover = false"></path>
-    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" class="text-warm-gray-400 dark:text-white fill-current">
-      fk
-    </circle>
+  <svg class="stroke-3 absolute z-10 fill-zinc-400 stroke-zinc-200 dark:fill-zinc-400 dark:stroke-zinc-500" :id="svg"
+    width="0" height="0" pointer-events="none">
+    <path ref="path" class="fill-transparent" pointer-events="visibleStroke" @mouseenter="isHover = true" @mouseleave="isHover = false" />
+    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" stroke="none"> fk </circle>
   </svg>
 </template>
 
@@ -72,7 +70,7 @@ const drawSVG = () => {
   const posEndY = positionEnd.y + endTop + endHeight / 2
   const posDiffY = posEndY - posStartY
   const posSvgY = posDiffY > 0 ? posStartY : posEndY
-  
+
   let posStartX = positionStart.x + startLeft
   let posEndX = positionEnd.x + endLeft
   let posDiffX = posEndX - posStartX
@@ -139,17 +137,4 @@ watch(
     }
   }
 )
-
-const isDark = useDark()
-const computedStrokeColor = computed(() => {
-  if (isHover.value) {
-    return 'rgb(16, 185, 129)'
-  } else {
-    if (isDark.value) {
-      return 'rgba(255,255,255,0.5)'
-    } else {
-      return 'rgba(214, 211, 209, 0.5)'
-    }
-  }
-})
 </script>
