@@ -1,16 +1,16 @@
 <template>
   <div :id="table.title"
-    class="absolute z-20 select-none rounded-lg border-2 border-zinc-200 bg-zinc-100 pb-2 hover:border-emerald-500 dark:border-zinc-700/50 dark:bg-zinc-800 overflow-clip"
+    class="selectable absolute z-40 select-none rounded-lg border-2 border-zinc-200 bg-zinc-100 pb-2 hover:border-emerald-600 dark:hover:border-emerald-600 dark:border-zinc-700/50 dark:bg-zinc-800 overflow-clip"
     :style="{ top: position.y + 'px', left: position.x + 'px' }" style="cursor: grab" @mousedown.prevent="dragStart"
     @mouseenter="isHover = true" @mouseleave="isHover = false">
     <h5
-      class="flex h-12 items-center justify-center rounded-t-lg border-b bg-zinc-200 px-3 text-lg font-medium text-neutral-300 dark:border-zinc-700 dark:bg-zinc-900/10">
+      class="flex h-12 items-center justify-center rounded-t-lg border-b bg-zinc-200 px-3 text-lg font-medium dark:text-neutral-300 dark:border-zinc-700 dark:bg-zinc-900/10">
       <i-bx:bx-news v-if="table.is_view" class="inline mb-1px mr-2"></i-bx:bx-news>
       {{ table?.title }}
     </h5>
     <template v-for="col in table?.columns" :key="col.title">
       <div
-        class="border-l-3 children:py-1.5 children:px-3 flex items-center justify-between gap-x-4 font-medium hover:bg-zinc-700/40"
+        class="border-l-3 children:py-1.5 children:px-3 flex items-center justify-between gap-x-4 font-medium dark:hover:bg-zinc-700/40 hover:bg-zinc-300/40"
         :class=" col.pk ? 'border-emerald-500' : 'border-transparent'" :id="`${table?.title}.${col.title}`">
         <dt class="text-zinc-700 dark:text-zinc-400">
           {{ col.title }}
@@ -58,7 +58,7 @@ const position = $computed(() => state.tables[`${table.title}`]?.position ?? 0) 
 
 // Dragging Event
 const dragStart = (e: MouseEvent) => {
-  if (e.which !== 1 || e.detail !== 1) return
+  if (e.which !== 1) return
   emit('tableDragging', true)
   isDragging = true
   document.onmousemove = dragEvent

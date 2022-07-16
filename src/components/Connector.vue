@@ -1,8 +1,11 @@
 <template>
-  <svg class="stroke-3 absolute z-10 fill-zinc-400 stroke-zinc-200 dark:fill-zinc-400 dark:stroke-zinc-500" :id="svg"
-    width="0" height="0" pointer-events="none">
-    <path ref="path" class="fill-transparent" pointer-events="visibleStroke" @mouseenter="isHover = true" @mouseleave="isHover = false" />
-    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" stroke="none"> fk </circle>
+  <svg
+    class="stroke-3 absolute z-10 fill-zinc-400 stroke-zinc-200 dark:fill-zinc-400 dark:stroke-zinc-500 hover:stroke-green-600 dark:hover:stroke-green-600 hover:z-20 group"
+    :id="svg" width="0" height="0" pointer-events="none">
+    <path :d="attr" pointer-events="visibleStroke" stroke="transparent" fill="transparent" stroke-width="15" />
+    <path ref="path" class="fill-transparent" pointer-events="visibleStroke" @mouseenter="isHover = true"
+      @mouseleave="isHover = false" />
+    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" stroke="none" class="group-hover:fill-green-600"> fk </circle>
   </svg>
 </template>
 
@@ -50,6 +53,8 @@ const fkPos = ref({
 
 const path = ref<SVGClipPathElement | null>(null)
 
+let attr = $ref("")
+
 const drawSVG = () => {
   if (!path.value) return
   const svgElem = document.getElementById(svg) as HTMLElement
@@ -76,6 +81,8 @@ const drawSVG = () => {
   let posDiffX = posEndX - posStartX
   let posSvgX = posDiffX > 0 ? posStartX : posEndX
 
+
+
   if (
     posDiffX + endRight > 0 &&
     posDiffX + endRight < startRight + endRight
@@ -86,35 +93,32 @@ const drawSVG = () => {
     posDiffX = posEndX - posStartX
     posDiffX < 0 ? (posSvgX = posEndX) : (posSvgX = posStartX)
 
-    path.value.setAttribute(
-      'd',
-      `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posDiffX) + 30} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
-    )
+    path.value.setAttribute('d',attr)
+
   } else if (posDiffX > 0) {
     posStartX = positionStart.x + startRight
     posEndX = endLeft + positionEnd.x
     posDiffX = posEndX - posStartX
     posSvgX = posStartX
 
-    path.value.setAttribute(
-      'd',
-      `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posStartX - posSvgX + posDiffX / 2)} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
-    )
+    path.value.setAttribute('d',attr)
+
   } else {
     posStartX = positionStart.x + startLeft
     posEndX = endRight + positionEnd.x
     posDiffX = posEndX - posStartX
     posSvgX = posEndX
-    path.value.setAttribute(
-      'd',
-      `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
+      attr = `M ${Math.abs(posStartX - posSvgX)} ${posDiffY > 0 ? 10 : Math.abs(posDiffY - 10)
       } H ${Math.abs(posStartX - posSvgX + posDiffX / 2)} V ${posDiffY > 0 ? Math.abs(posDiffY) + 10 : 10
       } H ${Math.abs(posEndX - posSvgX)}`
-    )
+
+    path.value.setAttribute('d',attr)
   }
 
   svgElem.style.left = posSvgX + 'px'

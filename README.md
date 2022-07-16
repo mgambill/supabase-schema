@@ -119,3 +119,6 @@ Also, if you like my work, please buy me a coffee ☕😳
 <a href="https://www.buymeacoffee.com/zernonia" target="_blank">
     <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Logo" >
   </a>
+
+
+https://play.tailwindcss.com/4Ee4hvXit8?file=config

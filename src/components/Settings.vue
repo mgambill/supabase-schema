@@ -82,6 +82,7 @@ const fetchData = () => {
       emit('fetch', true)
       if (res.ok) {
         const contentType = res.headers.get('content-type')
+ 
         if (
           contentType &&
           contentType.indexOf('application/openapi+json') !== -1

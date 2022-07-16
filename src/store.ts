@@ -22,6 +22,7 @@ export const state = reactive({
       let colGroup: Column[] = []
       Object.keys(value.properties).forEach((colKey: string) => {
         // Looping every Column
+
         const colVal = value.properties[colKey]
         let col: Column = {
           title: colKey,

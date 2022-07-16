@@ -67,7 +67,7 @@ function checkIsTrackpad(e: any) {
 }
 
 const dragStart = (e: MouseEvent) => {
-  if (e.button !== Buttons.Middle) return
+  if (e.which != 2) return
   isDragging.value = true
   document.onmousemove = dragEvent
   document.onmouseup = dragEnd
