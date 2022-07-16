@@ -1,6 +1,6 @@
 <template>
-  <menu class="absolute z-100 top-5 right-0 m-0 p-0 w-96 transition-right duration-500 ease-in-out mx-5"
-    :class="{ 'translate-x-full': togglePanel }">
+  <menu class="absolute z-100 top-5 m-0 p-0 w-96 transition-right duration-500 ease-in-out"
+    :class="togglePanel ? 'translate-x-full right-0' : 'right-5'">
 
     <div class="absolute -left-12">
       <!-- arrow  -->
@@ -16,7 +16,7 @@
         <img :src="Logo" class="h-32" alt="" />
       </div>
       <h1 style="-webkit-text-fill-color: transparent"
-        class="mt-4 flex items-baseline text-3xl font-bold bg-gradient-to-r from-green-500 to-green-400 bg-clip-text fill-transparent">
+        class="mt-4 flex items-baseline text-3xl font-bold bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text fill-transparent">
         Supabase Schema
         <a href="https://github.com/mgambill/supabase-schema" target="_blank">
           <i-mdi-github class="text-lg ml-2 text-dark-500 dark:hover:text-white"></i-mdi-github>
@@ -31,7 +31,7 @@
           <ol class="mt-2 dark:text-white-700 ml-8 list-decimal leading-tight">
             <li class="py-2">
               Obtain OpenAPI URL following instruction
-              <a class="underline hover:text-green-500" target="_blank"
+              <a class="underline hover:text-emerald-500" target="_blank"
                 href="https://github.com/mgambill/supabase-schema#-instructions">here</a>
             </li>
             <li class="py-2">Paste the URL below</li>
@@ -48,7 +48,7 @@
           @keyup.enter="fetchData" />
         <div class="flex justify-end mt-4">
           <button
-            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600 text-white"
+            class="bg-emerald-600 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-emerald-700 focus:outline-none focus:ring focus:ring-emerald-700 text-white"
             @click.prevent="fetchData">
             Fetch
           </button>

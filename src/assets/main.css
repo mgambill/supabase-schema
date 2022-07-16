@@ -50,6 +50,6 @@ input[type='color']::-webkit-color-swatch {
 }
 
 .btn-green {
-  @apply bg-emerald-500 text-white rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-emerald-600 focus:outline-none focus:ring focus:ring-emerald-600;
+  @apply bg-emerald-600 text-white rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-emerald-600 focus:outline-none focus:ring focus:ring-emerald-600;
 }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center space-x-3 right-10 bottom-5 absolute z-10">
+  <div class="flex items-center space-x-3 right-5 bottom-5 absolute z-10">
     <button class="btn" v-tooltip="'Export Types'" @click="exportTypes = true">
       <i-mdi:language-typescript></i-mdi:language-typescript>
     </button>
