@@ -41,6 +41,10 @@ export interface Visual {
   [key: string]: any
 }
 
-export interface VisualState {
-  [key: string]: Visual
+export interface VisualState extends Record<string, Visual> { }
+
+export enum Buttons {
+  Left = 0,
+  Middle = 1,
+  Right = 2,
 }

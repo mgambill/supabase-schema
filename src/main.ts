@@ -1,4 +1,4 @@
-import { createApp, DirectiveBinding } from 'vue'
+import { createApp, type DirectiveBinding } from 'vue'
 import App from './App.vue'
 import 'virtual:windi.css'
 import './assets/main.css'

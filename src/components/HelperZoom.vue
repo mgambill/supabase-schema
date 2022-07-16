@@ -27,7 +27,7 @@
 
   const updateView = (type: string) => {
     if (type == 'plus') {
-      if (state.schemaView.scale >= 3) return
+      if (state.schemaView.scale >= 2) return
       state.schemaView.scale += 0.1
     } else {
       if (state.schemaView.scale <= 0.47) return

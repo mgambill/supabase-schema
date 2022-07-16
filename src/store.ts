@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
-import { Column, TableState } from './interface'
+import type { Column, TableState } from './interface'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const state = reactive({
@@ -50,7 +50,6 @@ export const state = reactive({
       }
     }
 
-    // console.log(tableGroup, state.tables)
     state.tables = tableGroup
   },
   autoArrange: () => {
